@@ -1,0 +1,373 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-cyan: #00f5ff;
+  --color-neon-purple: #bf00ff;
+  --color-neon-pink: #ff0080;
+  --color-neon-green: #00ff88;
+  --color-neon-gold: #ffd700;
+  --color-dark-bg: #020818;
+  --color-dark-card: #0a1628;
+  --color-dark-border: rgba(0, 245, 255, 0.15);
+
+  --font-display: var(--font-orbitron), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+}
+
+/* ══════════════════════════════════════════════════
+   THEME TOKENS
+   Dark is the default (matches the original design).
+   Light mode mirrors it exactly, just inverted:
+   backgrounds/text flip, neon accent colors stay the same.
+   ══════════════════════════════════════════════════ */
+:root {
+  --bg-rgb: 2, 8, 24;
+  --bg-hex: #020818;
+  --card-rgb: 10, 22, 40;
+  --card-hex: #0a1628;
+  --fg-rgb: 255, 255, 255;
+  --fg-hex: #ffffff;
+  --muted-200-rgb: 229, 231, 235;
+  --muted-300-rgb: 209, 213, 219;
+  --muted-400-rgb: 156, 163, 175;
+  --muted-500-rgb: 107, 114, 128;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg-rgb: 245, 247, 252;
+  --bg-hex: #f5f7fc;
+  --card-rgb: 255, 255, 255;
+  --card-hex: #ffffff;
+  --fg-rgb: 8, 12, 24;
+  --fg-hex: #080c18;
+  --muted-200-rgb: 30, 41, 59;
+  --muted-300-rgb: 51, 65, 85;
+  --muted-400-rgb: 71, 85, 105;
+  --muted-500-rgb: 100, 116, 139;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  font-family: "Inter", sans-serif;
+  background-color: rgb(var(--bg-rgb));
+  color: rgb(var(--muted-300-rgb));
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── Neon Background ── */
+.neon-bg {
+  background: rgb(var(--bg-rgb));
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.neon-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 20% 10%, rgba(0, 245, 255, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(191, 0, 255, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 80%, rgba(255, 0, 128, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Neon Grid ── */
+.neon-grid {
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Neon Text ── */
+.neon-text-cyan {
+  color: #00f5ff;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.8), 0 0 30px rgba(0, 245, 255, 0.4), 0 0 60px rgba(0, 245, 255, 0.2);
+}
+
+.neon-text-purple {
+  color: #bf00ff;
+  text-shadow: 0 0 10px rgba(191, 0, 255, 0.8), 0 0 30px rgba(191, 0, 255, 0.4), 0 0 60px rgba(191, 0, 255, 0.2);
+}
+
+.neon-text-pink {
+  color: #ff0080;
+  text-shadow: 0 0 10px rgba(255, 0, 128, 0.8), 0 0 30px rgba(255, 0, 128, 0.4);
+}
+
+.neon-text-green {
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 30px rgba(0, 255, 136, 0.4);
+}
+
+/* ── Neon Border ── */
+.neon-border-cyan {
+  border: 1px solid rgba(0, 245, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.1), inset 0 0 10px rgba(0, 245, 255, 0.05);
+}
+
+.neon-border-purple {
+  border: 1px solid rgba(191, 0, 255, 0.4);
+  box-shadow: 0 0 10px rgba(191, 0, 255, 0.1);
+}
+
+/* ── Neon Card ── */
+.neon-card {
+  background: rgba(var(--card-rgb), 0.8);
+  border: 1px solid rgba(0, 245, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.05), 0 4px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.neon-card:hover {
+  border-color: rgba(0, 245, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 245, 255, 0.15), 0 0 60px rgba(0, 245, 255, 0.05), 0 4px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
+}
+
+/* ── Neon Button ── */
+.neon-btn-cyan {
+  background: transparent;
+  color: #00f5ff;
+  border: 1px solid #00f5ff;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.3), inset 0 0 10px rgba(0, 245, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.neon-btn-cyan:hover {
+  background: rgba(0, 245, 255, 0.1);
+  box-shadow: 0 0 25px rgba(0, 245, 255, 0.5), inset 0 0 20px rgba(0, 245, 255, 0.1);
+}
+
+.neon-btn-solid {
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
+  color: #fff;
+  border: 1px solid rgba(0, 245, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.neon-btn-solid:hover {
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.4), 0 0 80px rgba(191, 0, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ── Font Display ── */
+.font-display {
+  font-family: "Orbitron", sans-serif;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg-rgb));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#00f5ff, #bf00ff);
+  border-radius: 3px;
+}
+
+/* ── Scroll Animations ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Stagger delays ── */
+.delay-100 {
+  transition-delay: 0.1s;
+}
+
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+.delay-300 {
+  transition-delay: 0.3s;
+}
+
+.delay-400 {
+  transition-delay: 0.4s;
+}
+
+.delay-500 {
+  transition-delay: 0.5s;
+}
+
+.delay-600 {
+  transition-delay: 0.6s;
+}
+
+/* ── Pulsing neon glow animation ── */
+@keyframes neonPulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.8), 0 0 30px rgba(0, 245, 255, 0.4), 0 0 60px rgba(0, 245, 255, 0.2);
+  }
+
+  50% {
+    text-shadow: 0 0 20px rgba(0, 245, 255, 1), 0 0 50px rgba(0, 245, 255, 0.6), 0 0 100px rgba(0, 245, 255, 0.3);
+  }
+}
+
+.neon-pulse {
+  animation: neonPulse 3s ease-in-out infinite;
+}
+
+@keyframes floatY {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.float-anim {
+  animation: floatY 4s ease-in-out infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.3), transparent);
+  z-index: 9999;
+  pointer-events: none;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes borderGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.5), 0 0 60px rgba(191, 0, 255, 0.2);
+  }
+}
+
+.border-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #00f5ff 0%, #bf00ff 50%, #ff0080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Neon divider ── */
+.neon-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.5), rgba(191, 0, 255, 0.5), transparent);
+}
+
+/* ── Stat badge ── */
+.stat-badge {
+  background: rgba(0, 245, 255, 0.05);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-badge:hover {
+  background: rgba(0, 245, 255, 0.1);
+  border-color: rgba(0, 245, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.15);
+}
+
+/* ── Particle dots ── */
+@keyframes particleDrift {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(-60px) translateX(20px);
+    opacity: 0;
+  }
+}
