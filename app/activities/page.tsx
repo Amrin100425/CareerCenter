@@ -3,25 +3,21 @@ import { useState } from "react";
 import Link from "next/link";
 import { Calendar, MapPin, Users, ChevronRight, Search } from "lucide-react";
 import { defaultActivities } from "@/lib/store";
+import { useLang } from "@/lib/language-context";
+import tr, { t } from "@/lib/translations";
 
-const activityTypes = [
-  "All",
-  "Career Fair",
-  "Workshop",
-  "Seminar",
-  "Training",
-  "Networking",
-];
+const activityTypeKeys = ["All", "Career Fair", "Workshop", "Seminar", "Training", "Networking"] as const;
 
 const typeColors: Record<string, { bg: string; color: string; border: string; shadow: string }> = {
   "Career Fair": { bg: "rgba(255,0,128,0.1)", color: "#ff0080", border: "rgba(255,0,128,0.3)", shadow: "rgba(255,0,128,0.2)" },
-  Workshop: { bg: "rgba(0,245,255,0.1)", color: "#00f5ff", border: "rgba(0,245,255,0.3)", shadow: "rgba(0,245,255,0.2)" },
-  Seminar: { bg: "rgba(191,0,255,0.1)", color: "#bf00ff", border: "rgba(191,0,255,0.3)", shadow: "rgba(191,0,255,0.2)" },
-  Training: { bg: "rgba(0,255,136,0.1)", color: "#00ff88", border: "rgba(0,255,136,0.3)", shadow: "rgba(0,255,136,0.2)" },
-  Networking: { bg: "rgba(255,215,0,0.1)", color: "#ffd700", border: "rgba(255,215,0,0.3)", shadow: "rgba(255,215,0,0.2)" },
+  Workshop:      { bg: "rgba(0,245,255,0.1)",  color: "#00f5ff", border: "rgba(0,245,255,0.3)",  shadow: "rgba(0,245,255,0.2)" },
+  Seminar:       { bg: "rgba(191,0,255,0.1)",  color: "#bf00ff", border: "rgba(191,0,255,0.3)",  shadow: "rgba(191,0,255,0.2)" },
+  Training:      { bg: "rgba(0,255,136,0.1)",  color: "#00ff88", border: "rgba(0,255,136,0.3)",  shadow: "rgba(0,255,136,0.2)" },
+  Networking:    { bg: "rgba(255,215,0,0.1)",  color: "#ffd700", border: "rgba(255,215,0,0.3)",  shadow: "rgba(255,215,0,0.2)" },
 };
 
 export default function ActivitiesPage() {
+  const { lang } = useLang();
   const [selectedType, setSelectedType] = useState("All");
   const [search, setSearch] = useState("");
 
@@ -31,6 +27,12 @@ export default function ActivitiesPage() {
       !search || a.title.toLowerCase().includes(search.toLowerCase());
     return matchType && matchSearch;
   });
+
+  // Translate activity type pill label
+  const typeLabel = (key: string) => {
+    if (key === "All") return t(tr.activities.all, lang);
+    return t(tr.activities.activityTypes[key as keyof typeof tr.activities.activityTypes], lang);
+  };
 
   return (
     <div className="min-h-screen neon-bg relative overflow-hidden">
@@ -48,13 +50,13 @@ export default function ActivitiesPage() {
             className="text-sm font-semibold uppercase tracking-widest mb-2"
             style={{ color: "#bf00ff", textShadow: "0 0 10px rgba(191,0,255,0.4)" }}
           >
-            Learn & Connect
+            {t(tr.activities.learnConnect, lang)}
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-[rgb(var(--fg-rgb))] mb-4 tracking-wider">
-            Activities & Events
+            {t(tr.activities.pageTitle, lang)}
           </h1>
           <p className="mb-8 font-light text-[rgb(var(--muted-400-rgb))]">
-            Career fairs, workshops, seminars and networking events in Siem Reap
+            {t(tr.activities.pageSubtitle, lang)}
           </p>
           <div
             className="flex items-center gap-3 rounded-2xl px-4 py-3 max-w-md bg-[var(--card-hex)]/80 backdrop-blur-md border border-[rgba(191,0,255,0.2)] shadow-[0_0_20px_rgba(191,0,255,0.1)] focus-within:shadow-[0_0_25px_rgba(191,0,255,0.2)] focus-within:border-[#bf00ff] transition-all"
@@ -63,7 +65,7 @@ export default function ActivitiesPage() {
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search events..."
+              placeholder={t(tr.activities.search, lang)}
               className="bg-transparent text-sm outline-none flex-1 text-[rgb(var(--fg-rgb))] placeholder-[rgb(var(--muted-500-rgb))]"
             />
           </div>
@@ -71,8 +73,9 @@ export default function ActivitiesPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+        {/* Filter buttons */}
         <div className="flex flex-wrap gap-3 mb-10">
-          {activityTypes.map((type) => (
+          {activityTypeKeys.map((type) => (
             <button
               key={type}
               onClick={() => setSelectedType(type)}
@@ -82,7 +85,7 @@ export default function ActivitiesPage() {
                   : "text-[rgb(var(--muted-400-rgb))] hover:text-[rgb(var(--fg-rgb))] hover:bg-[rgba(var(--fg-rgb),0.05)] border border-[rgba(var(--fg-rgb),0.05)]"
               }`}
             >
-              {type}
+              {typeLabel(type)}
             </button>
           ))}
         </div>
@@ -91,10 +94,10 @@ export default function ActivitiesPage() {
           <div className="text-center py-24 bg-[var(--card-hex)]/40 border border-[rgba(191,0,255,0.1)] rounded-2xl backdrop-blur-sm">
             <div className="text-5xl mb-4 opacity-50">📅</div>
             <h3 className="font-display font-bold text-xl mb-2 text-[rgb(var(--fg-rgb))] tracking-wider">
-              No events found
+              {t(tr.activities.noEvents, lang)}
             </h3>
             <p className="text-[rgb(var(--muted-500-rgb))] text-sm">
-              Check back soon for new activities
+              {t(tr.activities.checkBack, lang)}
             </p>
           </div>
         ) : (
@@ -146,7 +149,7 @@ export default function ActivitiesPage() {
                       className="text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-widest"
                       style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}`, boxShadow: `0 0 10px ${tc.shadow}` }}
                     >
-                      {act.type}
+                      {typeLabel(act.type)}
                     </span>
                     <h3
                       className="font-display font-bold text-lg mt-4 mb-3 text-[rgb(var(--fg-rgb))] group-hover:text-[#bf00ff] transition-colors tracking-wide leading-snug"
@@ -167,6 +170,15 @@ export default function ActivitiesPage() {
                       {act.description}
                     </p>
 
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-1.5">
+                        <Users size={12} style={{ color: "rgba(0,245,255,0.6)" }} />
+                        <span className="text-xs" style={{ color: "rgba(var(--fg-rgb),0.45)" }}>
+                          {act.registered}/{act.capacity} {t(tr.activities.registered, lang)}
+                        </span>
+                      </div>
+                    </div>
+
                     <Link
                       href={`/activities/${act.id}`}
                       className={`w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 ${
@@ -177,10 +189,10 @@ export default function ActivitiesPage() {
                       style={spotsLeft <= 0 ? { pointerEvents: "none" } : {}}
                     >
                       {spotsLeft <= 0 ? (
-                        "Fully Booked"
+                        t(tr.activities.fullyBooked, lang)
                       ) : (
                         <>
-                          View Event Details
+                          {t(tr.activities.viewDetails, lang)}
                           <ChevronRight size={14} />
                         </>
                       )}

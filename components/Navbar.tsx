@@ -4,17 +4,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-
-const navLinks = [
-  { label: "Home", href: "/" },
-  // { label: "Jobs", href: "/jobs" },
-  { label: "Activities", href: "/activities" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+import LanguageToggle from "./LanguageToggle";
+import { useLang } from "@/lib/language-context";
+import tr, { t } from "@/lib/translations";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { lang } = useLang();
+
+  const navLinks = [
+    { label: t(tr.nav.home, lang),       href: "/" },
+    { label: t(tr.nav.activities, lang), href: "/activities" },
+    { label: t(tr.nav.about, lang),      href: "/about" },
+    { label: t(tr.nav.contact, lang),    href: "/contact" },
+  ];
 
   return (
     <nav
@@ -49,6 +52,8 @@ export default function Navbar() {
               </p>
             </div>
           </Link>
+
+          {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((l) => (
               <Link
@@ -61,23 +66,27 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          {/* Desktop right controls */}
+          <div className="hidden md:flex items-center gap-3">
             <Link
               href="/admin"
               className="text-[rgb(var(--muted-400-rgb))] hover:text-[#bf00ff] hover:drop-shadow-[0_0_8px_rgba(191,0,255,0.8)] text-sm font-medium transition-all tracking-wide uppercase"
             >
-              Admin
+              {t(tr.nav.admin, lang)}
             </Link>
             <Link
               href="https://t.me/useacareercenter"
               className="neon-btn-solid px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-300"
             >
-              Find a Job
+              {t(tr.nav.findJob, lang)}
             </Link>
+            <LanguageToggle />
             <ThemeToggle />
           </div>
 
+          {/* Mobile controls */}
           <div className="flex items-center gap-2 md:hidden">
+            <LanguageToggle />
             <ThemeToggle />
             <button
               onClick={() => setOpen(!open)}
@@ -113,15 +122,15 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="block text-[rgb(var(--muted-400-rgb))] hover:text-[#bf00ff] hover:bg-[rgba(191,0,255,0.05)] px-4 py-3 rounded-lg text-sm transition uppercase tracking-widest"
             >
-              Admin Panel
+              {t(tr.nav.adminPanel, lang)}
             </Link>
             <div className="pt-2">
               <Link
-                href="/jobs"
+                href="https://t.me/useacareercenter"
                 onClick={() => setOpen(false)}
                 className="neon-btn-cyan block text-center px-4 py-3 rounded-xl text-sm font-semibold w-full"
               >
-                Find a Job
+                {t(tr.nav.findJob, lang)}
               </Link>
             </div>
           </div>

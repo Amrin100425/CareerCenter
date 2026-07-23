@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/lib/language-context";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
@@ -34,9 +35,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen flex flex-col neon-bg font-sans" style={{ fontFamily: "var(--font-inter), sans-serif" }} suppressHydrationWarning>
         <ThemeProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <LanguageProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

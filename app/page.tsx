@@ -2,7 +2,7 @@
 import Image from "next/image";
 import bg from "@/photos/Careercenter.jpg";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import {
   ArrowRight,
   MapPin,
@@ -12,9 +12,10 @@ import {
   ChevronRight,
   Briefcase,
   Calendar,
-  TrendingUp,
 } from "lucide-react";
 import { defaultJobs, defaultActivities, defaultContent, defaultPhotos } from "@/lib/store";
+import { useLang } from "@/lib/language-context";
+import tr, { t } from "@/lib/translations";
 
 // ── Scroll Reveal Hook ──
 function useScrollReveal() {
@@ -36,24 +37,21 @@ function useScrollReveal() {
   }, []);
 }
 
+// Khmer stat labels lookup
+const statLabelMap: Record<string, { en: string; km: string }> = {
+  "Jobs Posted":         tr.stats.jobsPosted,
+  "Employers Partnered": tr.stats.employersPartner,
+  "Job Seekers Placed":  tr.stats.seekersPlaced,
+  "Training Programs":   tr.stats.trainingPrograms,
+};
+
 export default function HomePage() {
   useScrollReveal();
+  const { lang } = useLang();
 
-  const featuredJobs = defaultJobs.filter((j) => j.featured);
   const featuredActivities = defaultActivities.filter((a) => a.featured);
   const featuredPhotos = defaultPhotos.filter((p) => p.featured);
   const content = defaultContent;
-
-  const categories = [
-    { name: "Hospitality", icon: "🏨", count: 45, color: "#00f5ff" },
-    { name: "Tourism", icon: "🗺️", count: 38, color: "#bf00ff" },
-    { name: "Technology", icon: "💻", count: 22, color: "#00ff88" },
-    { name: "Finance", icon: "💰", count: 19, color: "#ffd700" },
-    { name: "Marketing", icon: "📣", count: 17, color: "#ff0080" },
-    { name: "Education", icon: "📚", count: 14, color: "#00f5ff" },
-    { name: "Healthcare", icon: "⚕️", count: 11, color: "#bf00ff" },
-    { name: "Retail", icon: "🛍️", count: 9, color: "#00ff88" },
-  ];
 
   return (
     <div className="relative">
@@ -98,7 +96,7 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mb-50">
           {/* Location badge */}
           <div
             className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 reveal"
@@ -109,7 +107,7 @@ export default function HomePage() {
           >
             <MapPin size={12} style={{ color: "#00f5ff" }} />
             <span className="text-xs font-medium tracking-wider" style={{ color: "rgba(0,245,255,0.8)" }}>
-              UNIVERSITY OF SOUTH-EAST ASIA · SIEM REAP, CAMBODIA
+              {t(tr.home.badge, lang)}
             </span>
           </div>
 
@@ -119,8 +117,8 @@ export default function HomePage() {
               className="font-display text-5xl sm:text-7xl font-black leading-none mb-6"
               style={{ letterSpacing: "-0.02em" }}
             >
-              <span className="block text-[rgb(var(--fg-rgb))] neon-pulse">YOUR CAREER</span>
-              <span className="block gradient-text neon-pulse">STARTS HERE</span>
+              <span className="block text-[rgb(var(--fg-rgb))] neon-pulse">{t(tr.home.heroLine1, lang)}</span>
+              <span className="block gradient-text neon-pulse">{t(tr.home.heroLine2, lang)}</span>
             </h1>
           </div>
 
@@ -138,13 +136,13 @@ export default function HomePage() {
               className="neon-btn-solid font-semibold px-8 py-3 rounded-xl flex items-center gap-2 text-sm"
             >
               <Zap size={16} />
-              Explore Activities
+              {t(tr.home.exploreBtn, lang)}
             </Link>
             <Link
               href="/about"
               className="neon-btn-cyan font-semibold px-8 py-3 rounded-xl flex items-center gap-2 text-sm"
             >
-              About Us <ArrowRight size={16} />
+              {t(tr.home.aboutBtn, lang)} <ArrowRight size={16} />
             </Link>
           </div>
 
@@ -159,7 +157,7 @@ export default function HomePage() {
                   {s.value}
                 </p>
                 <p className="text-xs tracking-wider uppercase" style={{ color: "rgba(var(--fg-rgb),0.45)" }}>
-                  {s.label}
+                  {statLabelMap[s.label] ? t(statLabelMap[s.label], lang) : s.label}
                 </p>
               </div>
             ))}
@@ -194,11 +192,11 @@ export default function HomePage() {
             >
               <Briefcase size={12} style={{ color: "#00f5ff" }} />
               <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#00f5ff" }}>
-                Don&apos;t Miss Out
+                {t(tr.home.dontMiss, lang)}
               </span>
             </div>
             <h2 className="font-display text-4xl font-bold text-[rgb(var(--fg-rgb))] reveal delay-100">
-              CAREER CENTER
+              {t(tr.home.careerCenter, lang)}
             </h2>
             <div className="neon-divider w-32 mx-auto mt-4 reveal delay-200" />
           </div>
@@ -241,60 +239,11 @@ export default function HomePage() {
               href="/activities"
               className="neon-btn-solid inline-flex items-center gap-2 font-semibold px-10 py-3.5 rounded-xl text-sm"
             >
-              Explore All Activities  <ArrowRight size={16} />
+              {t(tr.home.exploreAll, lang)}  <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
-
-      {/* ── CATEGORIES ── */}
-      {/* <section className="py-20 relative overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 80% 40% at 50% 50%, rgba(191,0,255,0.04) 0%, transparent 60%)",
-          }}
-        />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div
-              className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-4 reveal"
-              style={{
-                background: "rgba(191,0,255,0.07)",
-                border: "1px solid rgba(191,0,255,0.2)",
-              }}
-            >
-              <TrendingUp size={12} style={{ color: "#bf00ff" }} />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#bf00ff" }}>
-                Browse by Industry
-              </span>
-            </div>
-            <h2 className="font-display text-4xl font-bold text-[rgb(var(--fg-rgb))] reveal delay-100">
-              JOB CATEGORIES
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {categories.map((cat, i) => (
-              <div
-                key={cat.name}
-                className={`neon-card rounded-2xl p-5 text-center cursor-pointer reveal delay-${Math.min((i % 4 + 1) * 100, 400)}`}
-              >
-                <div className="text-3xl mb-3 float-anim" style={{ animationDelay: `${i * 0.3}s` }}>
-                  {cat.icon}
-                </div>
-                <h3 className="font-semibold text-sm text-[rgb(var(--fg-rgb))] mb-1">{cat.name}</h3>
-                <p
-                  className="text-xs font-bold"
-                  style={{ color: cat.color, textShadow: `0 0 10px ${cat.color}` }}
-                >
-                  {cat.count} jobs
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
       {/* ── ACTIVITIES ── */}
       <section className="py-24 relative overflow-hidden">
@@ -317,11 +266,11 @@ export default function HomePage() {
               >
                 <Calendar size={12} style={{ color: "#00ff88" }} />
                 <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#00ff88" }}>
-                  Grow Your Skills
+                  {t(tr.home.growSkills, lang)}
                 </span>
               </div>
               <h2 className="font-display text-4xl font-bold text-[rgb(var(--fg-rgb))] reveal delay-100">
-                UPCOMING ACTIVITIES
+                {t(tr.home.upcomingAct, lang)}
               </h2>
             </div>
             <Link
@@ -329,7 +278,7 @@ export default function HomePage() {
               className="hidden sm:flex items-center gap-1 text-sm font-medium transition-colors reveal"
               style={{ color: "rgba(0,255,136,0.7)" }}
             >
-              All Events <ArrowRight size={16} />
+              {t(tr.home.allEvents, lang)} <ArrowRight size={16} />
             </Link>
           </div>
 
@@ -379,7 +328,7 @@ export default function HomePage() {
                     <div className="flex items-center gap-1">
                       <Users size={11} style={{ color: "rgba(0,245,255,0.5)" }} />
                       <span className="text-xs" style={{ color: "rgba(var(--fg-rgb),0.4)" }}>
-                        {act.registered}/{act.capacity} registered
+                        {act.registered}/{act.capacity} {t(tr.home.registered, lang)}
                       </span>
                     </div>
                     <Link
@@ -387,7 +336,7 @@ export default function HomePage() {
                       className="text-xs font-semibold flex items-center gap-1 transition-all"
                       style={{ color: "#00f5ff" }}
                     >
-                      Register <ChevronRight size={13} />
+                      {t(tr.home.register, lang)} <ChevronRight size={13} />
                     </Link>
                   </div>
                 </div>
@@ -400,7 +349,7 @@ export default function HomePage() {
               href="/activities"
               className="neon-btn-cyan inline-flex items-center gap-2 font-semibold px-10 py-3.5 rounded-xl text-sm"
             >
-              View All Events <ArrowRight size={16} />
+              {t(tr.home.viewAllEvents, lang)} <ArrowRight size={16} />
             </Link>
           </div>
         </div>
@@ -443,22 +392,21 @@ export default function HomePage() {
           >
             <Star size={12} style={{ color: "#ff0080" }} />
             <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#ff0080" }}>
-              For Employers
+              {t(tr.home.forEmployers, lang)}
             </span>
           </div>
 
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-[rgb(var(--fg-rgb))] mb-6 reveal delay-100">
-            Are You an Employer
+            {t(tr.home.ctaHeadline1, lang)}
             <br />
-            <span className="gradient-text">in Siem Reap?</span>
+            <span className="gradient-text">{t(tr.home.ctaHeadline2, lang)}</span>
           </h2>
 
           <p
             className="text-lg mb-10 max-w-2xl mx-auto leading-relaxed reveal delay-200"
             style={{ color: "rgba(var(--fg-rgb),0.6)" }}
           >
-            Post your job openings and reach thousands of qualified candidates.
-            Partner with USEA Career Center today.
+            {t(tr.home.ctaDesc, lang)}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center reveal delay-300">
@@ -467,13 +415,13 @@ export default function HomePage() {
               className="neon-btn-solid font-bold px-10 py-3.5 rounded-xl flex items-center justify-center gap-2"
             >
               <Briefcase size={16} />
-              Post a Job
+              {t(tr.home.postJob, lang)}
             </Link>
             <Link
               href="/contact"
               className="neon-btn-cyan font-bold px-10 py-3.5 rounded-xl flex items-center justify-center gap-2"
             >
-              Contact Us <ArrowRight size={16} />
+              {t(tr.home.contactUs, lang)} <ArrowRight size={16} />
             </Link>
           </div>
         </div>

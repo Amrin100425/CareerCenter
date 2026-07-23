@@ -1,8 +1,23 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, Globe, Play } from "lucide-react";
+import { useLang } from "@/lib/language-context";
+import tr, { t } from "@/lib/translations";
+
+const jobCatKeys = ["Hospitality", "Tourism", "Technology", "Finance", "Marketing", "Education", "Healthcare", "Retail"] as const;
 
 export default function Footer() {
+  const { lang } = useLang();
+
+  const quickLinks = [
+    { label: t(tr.footer.browseJobs,        lang), href: "/jobs" },
+    { label: t(tr.footer.activitiesEvents,  lang), href: "/activities" },
+    { label: t(tr.footer.aboutUs,           lang), href: "/about" },
+    { label: t(tr.footer.contact,           lang), href: "/contact" },
+    { label: t(tr.footer.adminPanel,        lang), href: "/admin" },
+  ];
+
   return (
     <footer style={{ background: "var(--bg-hex)", borderTop: "1px solid rgba(0, 245, 255, 0.1)" }} className="text-[rgb(var(--muted-300-rgb))] relative overflow-hidden">
       {/* Background ambient light */}
@@ -30,8 +45,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-[rgb(var(--muted-400-rgb))] leading-relaxed font-light">
-              Empowering Cambodian talent through opportunities, training, and
-              employer connections in Siem Reap.
+              {t(tr.footer.tagline, lang)}
             </p>
             <div className="flex gap-3 mt-6">
               <a
@@ -53,16 +67,10 @@ export default function Footer() {
 
           <div>
             <h4 className="text-[rgb(var(--fg-rgb))] font-display font-bold text-sm mb-6 uppercase tracking-[0.2em]">
-              Quick Links
+              {t(tr.footer.quickLinks, lang)}
             </h4>
             <ul className="space-y-3">
-              {[
-                { label: "Browse Jobs", href: "/jobs" },
-                { label: "Activities & Events", href: "/activities" },
-                { label: "About Us", href: "/about" },
-                { label: "Contact", href: "/contact" },
-                { label: "Admin Panel", href: "/admin" },
-              ].map((l) => (
+              {quickLinks.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
@@ -78,26 +86,17 @@ export default function Footer() {
 
           <div>
             <h4 className="text-[rgb(var(--fg-rgb))] font-display font-bold text-sm mb-6 uppercase tracking-[0.2em]">
-              Job Categories
+              {t(tr.footer.jobCategories, lang)}
             </h4>
             <ul className="space-y-3">
-              {[
-                "Hospitality",
-                "Tourism",
-                "Technology",
-                "Finance",
-                "Marketing",
-                "Education",
-                "Healthcare",
-                "Retail",
-              ].map((c) => (
+              {jobCatKeys.map((c) => (
                 <li key={c}>
                   <Link
                     href={`/jobs?category=${c}`}
                     className="text-sm text-[rgb(var(--muted-400-rgb))] hover:text-[#bf00ff] hover:drop-shadow-[0_0_5px_rgba(191,0,255,0.6)] transition-all flex items-center gap-2 group"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[rgba(191,0,255,0.3)] group-hover:bg-[#bf00ff] group-hover:shadow-[0_0_5px_#bf00ff] transition-all"></span>
-                    {c}
+                    {t(tr.footer.jobCats[c], lang)}
                   </Link>
                 </li>
               ))}
@@ -106,7 +105,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-[rgb(var(--fg-rgb))] font-display font-bold text-sm mb-6 uppercase tracking-[0.2em]">
-              Contact Us
+              {t(tr.footer.contactUs, lang)}
             </h4>
             <div className="space-y-4">
               <div className="flex items-start gap-3 group">
@@ -148,10 +147,10 @@ export default function Footer() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-[rgb(var(--muted-500-rgb))] uppercase tracking-wider font-semibold">
-            © 2026 USEA Career Center, Siem Reap. All rights reserved.
+            {t(tr.footer.copyright, lang)}
           </p>
           <p className="text-xs text-[#00f5ff] uppercase tracking-widest opacity-60">
-            Connecting Cambodian talent with opportunity
+            {t(tr.footer.slogan, lang)}
           </p>
         </div>
       </div>
