@@ -223,28 +223,28 @@ export const defaultContent: SiteContent = {
 
 export const defaultPhotos = [
   {
-    id: "1",
+    id: "2",
     featured: true,
     heroImg: sc,
     heroSubtitle: "Sister of Code",
     articles: "កម្មវិធីបណ្តុះបណ្តាលជំនាញការងារ Sisters of Code ឆ្នាំ 2026 ខេត្តសៀមរាប"
   },
   {
-    id: "2",
+    id: "3",
     featured: true,
     heroImg: ev,
     heroSubtitle: "សិក្ខាសាលា",
     articles: "កម្មវិធីសិក្ខាសាលាផ្សព្វផ្សាយ «ច្បាប់ស្ដីពីគណនេយ្យនិងសវនកម្ម និងបទបញ្បញ្ញត្ដិពាក់ព័ន្ធ» នឹងចាប់ផ្ដើមនៅថ្ងៃស្អែកនេះហើយ តោះរួសរាន់ចុះឈ្មោះឱ្យបានគ្រប់ៗគ្នា ជាពិសេសបានជួបជាមួយនឹងវាគ្មិនរបស់យើងទាំង ៤រូប។"
   },
   {
-    id: "3",
+    id: "4",
     featured: true,
     heroImg: gd,
     heroSubtitle: "USEA Graduation Ceremony",
     articles: "អបអរសាទរ ពិធីប្រគល់សញ្ញាបត្រដល់និស្សិតជ័យលាភីកម្រិតបរិញ្ញាបត្ររង បរិញ្ញាបត្រ និងបរិញ្ញាបត្រជាន់ខ្ពស់ក្រោមអធិបតីភាព ដ៏ខ្ពង់ខ្ពស់បំផុតសម្តេចមហាបវរធិបតី ហ៊ុន ម៉ាណែត នាយករដ្ឋមន្ត្រី នៃព្រះរាជាណាចក្រកម្ពុជា នាថ្ងៃទី២១ ខែកក្កដា ឆ្នាំ២០២៦ នៅសណ្ឋាគារ សុខាសៀមរាប"
   },
   {
-    id: "4",
+    id: "5",
     featured: true,
     heroImg: ps,
     heroSubtitle: "KB Prsac Collaboration",

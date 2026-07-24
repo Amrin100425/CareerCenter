@@ -11,12 +11,13 @@ import {
 import { defaultActivities } from "@/lib/store";
 import { notFound } from "next/navigation";
 
-export default function ActivityDetailPage({
+export default async function ActivityDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const activity = defaultActivities.find((a) => a.id === params.id);
+  const { id } = await params;
+  const activity = defaultActivities.find((a) => a.id === id);
   if (!activity) notFound();
 
   const spotsLeft = activity.capacity - activity.registered;

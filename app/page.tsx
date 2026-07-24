@@ -203,9 +203,10 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {featuredPhotos.map((ph, i) => (
-              <div
+              <Link
+                href={`/activities/${ph.id}`}
                 key={ph.id}
-                className={`neon-card rounded-2xl overflow-hidden flex flex-col sm:flex-row items-stretch cursor-pointer ${i === 0 ? "reveal-left" : "reveal-right"} delay-${(i + 1) * 100}`}
+                className={`neon-card rounded-2xl overflow-hidden flex flex-col sm:flex-row items-stretch cursor-pointer hover:shadow-[0_0_25px_rgba(191,0,255,0.15)] hover:border-[rgba(191,0,255,0.3)] transition-all duration-300 ${i === 0 ? "reveal-left" : "reveal-right"} delay-${(i + 1) * 100}`}
               >
                 <div className="relative sm:w-52 h-44 sm:h-auto flex-shrink-0 overflow-hidden">
                   <Image
@@ -230,7 +231,7 @@ export default function HomePage() {
                     {ph.articles}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
