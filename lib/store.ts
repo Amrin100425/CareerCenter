@@ -3,7 +3,7 @@ import sc from "@/photos/SisterOfCode.jpg"
 import ev from "@/photos/Event.jpg"
 import gd from "@/photos/UseaGraduation.jpg"
 import ps from "@/photos/Prasak.jpg"
-
+import cv from "@/photos/CareerImprovement.jpg"
 // Shared in-memory data store (in production, use a database)
 export type Job = {
   id: string;
@@ -24,14 +24,14 @@ export type Job = {
 export type Activity = {
   id: string;
   title: string;
-  type: "Workshop" | "Career Fair" | "Seminar" | "Training" | "Networking";
+  type: "Workshop" | "Career Improvement" | "Events" | "Training" | "Networking";
   date: string;
   time: string;
   location: string;
   description: string;
   capacity: number;
   registered: number;
-  image: string;
+  image: any;
   featured: boolean;
 };
 
@@ -141,54 +141,54 @@ export const defaultJobs: Job[] = [
 export const defaultActivities: Activity[] = [
   {
     id: "1",
-    title: "Career Fair 2025 – Hospitality & Tourism",
-    type: "Career Fair",
+    title: "CV Improvement",
+    type: "Career Improvement",
     date: "2025-07-20",
     time: "9:00 AM – 4:00 PM",
     location: "Angkor Century Resort, Siem Reap",
-    description: "Meet 30+ top employers from Siem Reap's hospitality and tourism sector. Bring your CV and dress professionally. On-the-spot interviews available.",
+    description: "សកម្មភាពប្អូនៗនិស្សិតដែលបានចូលមកប្រឹក្សាយោបល់ និងរៀបចំប្រវត្តិរូបសង្ខេប (CV) សម្រាប់ត្រៀមខ្លួនចាប់យកឱកាសការងារ ទទួលប្រឹក្សាយោបល់ និងប្រើប្រាស់សេវាកម្មដោយ «ឥតគិតថ្លៃ»😍😍",
     capacity: 500,
     registered: 312,
-    image: "🎪",
+    image: cv,
     featured: true,
   },
   {
     id: "2",
-    title: "CV Writing & Interview Skills Workshop",
+    title: "Sister of Code",
     type: "Workshop",
     date: "2025-07-12",
     time: "2:00 PM – 5:00 PM",
     location: "USEA Career Center, Siem Reap",
-    description: "A hands-on workshop covering how to craft a compelling CV, write cover letters, and ace interviews. Limited seats — register now!",
+    description: "ចូលរួមជាមួយ «កម្មវិធីបណ្តុះបណ្តាលជំនាញការងារ ឆ្នាំ២០២៦» នៅខេត្តសៀមរាប ដើម្បីទទួលបានជំនាញឌីជីថលជាក់ស្តែងសម្រាប់អាជីពការងារនាពេលអនាគតរបស់អ្នក។\n✅ កម្មវិធីបណ្តុះបណ្តាលរយៈពេល ១៥ សប្តាហ៍ ដោយឥតគិតថ្លៃ \n✅ សិក្សារៀងរាល់ថ្ងៃអាទិត្យ (៦ ម៉ោងក្នុងមួយសប្តាហ៍) \n✅ សម្រាប់និស្សិតស្រីមកពីសាកលវិទ្យាល័យ និងវិទ្យាស្ថានបណ្តុះបណ្តាលបច្ចេកទេសនិងវិជ្ជាជីវៈ (TVET) ដែលកំពុងស្នាក់នៅក្នុងខេត្តសៀមរាប ",
     capacity: 40,
     registered: 34,
-    image: "📝",
+    image: sc,
     featured: true,
   },
   {
     id: "3",
-    title: "Digital Marketing for Small Business",
-    type: "Training",
+    title: "ច្បាប់ស្ដីពីគណនេយ្យនិងសវនកម្ម និងបទបញ្បញ្ញត្ដិពាក់ព័ន្ធ",
+    type: "Events",
     date: "2025-07-18",
     time: "8:30 AM – 12:00 PM",
     location: "USEA Career Center, Siem Reap",
-    description: "Learn how to grow your business with Facebook, Instagram, and TikTok marketing. Free for registered USEA members.",
+    description: "កម្មវិធីសិក្ខាសាលាផ្សព្វផ្សាយ «ច្បាប់ស្ដីពីគណនេយ្យនិងសវនកម្ម និងបទបញ្បញ្ញត្ដិពាក់ព័ន្ធ» នឹងចាប់ផ្ដើមនៅថ្ងៃស្អែកនេះហើយ តោះរួសរាន់ចុះឈ្មោះឱ្យបានគ្រប់ៗគ្នា ជាពិសេសបានជួបជាមួយនឹងវាគ្មិនរបស់យើងទាំង ៤រូប។",
     capacity: 30,
     registered: 22,
-    image: "📱",
+    image: ev,
     featured: false,
   },
   {
     id: "4",
-    title: "Entrepreneurship Seminar: Starting a Business in Cambodia",
-    type: "Seminar",
-    date: "2025-07-25",
-    time: "10:00 AM – 12:00 PM",
-    location: "Online (Zoom)",
-    description: "Expert panel discussing legal registration, funding, and market opportunities for entrepreneurs in Siem Reap and beyond.",
+    title: "USEA Graduation🎓✨",
+    type: "Events",
+    date: "2026-07-21",
+    time: "7:00 AM – 12:00 PM",
+    location: "Sokha Angkor Siem Reap",
+    description: "🎉 ✨អបអរសាទរ ពិធីប្រគល់សញ្ញាបត្រដល់និស្សិតជ័យលាភីកម្រិតបរិញ្ញាបត្ររង បរិញ្ញាបត្រ និងបរិញ្ញាបត្រជាន់ខ្ពស់ក្រោមអធិបតីភាព ដ៏ខ្ពង់ខ្ពស់បំផុតសម្តេចមហាបវរធិបតី ហ៊ុន ម៉ាណែត នាយករដ្ឋមន្ត្រី នៃព្រះរាជាណាចក្រកម្ពុជា នាថ្ងៃទី២១ ខែកក្កដា ឆ្នាំ២០២៦ នៅសណ្ឋាគារ សុខាសៀមរាប🎉❤️ University of south East Asia (USEA)",
     capacity: 200,
     registered: 87,
-    image: "🚀",
+    image: gd,
     featured: false,
   },
   {
@@ -201,7 +201,7 @@ export const defaultActivities: Activity[] = [
     description: "Connect with professionals under 35 in Siem Reap. Light refreshments provided. Grow your network and discover new opportunities.",
     capacity: 80,
     registered: 45,
-    image: "🤝",
+    image: ps,
     featured: false,
   },
 ];

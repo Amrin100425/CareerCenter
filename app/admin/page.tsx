@@ -186,7 +186,7 @@ export default function AdminPage() {
           <div>
             <label className="text-xs text-[rgb(var(--muted-400-rgb))] font-semibold uppercase tracking-widest mb-2 block">Type</label>
             <select value={act.type || "Workshop"} onChange={(e) => onChange({ ...act, type: e.target.value as Activity["type"] })} className={inputCls.replace('focus:border-[#00f5ff]', 'focus:border-[#bf00ff]').replace('focus:shadow-[0_0_15px_rgba(0,245,255,0.2)]', 'focus:shadow-[0_0_15px_rgba(191,0,255,0.2)]')}>
-              {["Workshop", "Career Fair", "Seminar", "Training", "Networking"].map(t => <option key={t} value={t} className="bg-[var(--bg-hex)]">{t}</option>)}
+              {["Workshop", "Career Improvement", "Events", "Training", "Networking"].map(t => <option key={t} value={t} className="bg-[var(--bg-hex)]">{t}</option>)}
             </select>
           </div>
           <div className="flex items-center gap-3 pt-7">
@@ -291,7 +291,9 @@ export default function AdminPage() {
                     {activities.slice(0, 4).map((a) => (
                       <div key={a.id} className="flex items-center justify-between p-4 rounded-xl bg-[rgba(var(--bg-rgb),0.6)] border border-[rgba(var(--fg-rgb),0.02)] hover:border-[rgba(0,255,136,0.2)] transition-colors group">
                         <div className="flex items-center gap-4">
-                          <span className="text-3xl bg-[var(--bg-hex)] w-12 h-12 rounded-xl flex items-center justify-center border border-[rgba(var(--fg-rgb),0.05)]">{a.image}</span>
+                          <span className="text-3xl bg-[var(--bg-hex)] w-12 h-12 rounded-xl flex items-center justify-center border border-[rgba(var(--fg-rgb),0.05)]">
+                            {typeof a.image === "string" ? a.image : (a.type === "Career Improvement" ? "🎪" : a.type === "Workshop" ? "📝" : a.type === "Training" ? "📱" : a.type === "Events" ? "🚀" : "🤝")}
+                          </span>
                           <div>
                             <p className="font-bold text-sm text-[rgb(var(--muted-200-rgb))] group-hover:text-[#00ff88] transition-colors">{a.title}</p>
                             <p className="text-[rgb(var(--muted-500-rgb))] text-xs mt-1">{a.date} <span className="opacity-50">·</span> {a.type}</p>
@@ -357,7 +359,9 @@ export default function AdminPage() {
                 {activities.map((act) => (
                   <div key={act.id} className="bg-[var(--card-hex)]/60 backdrop-blur-md rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-[rgba(var(--fg-rgb),0.05)] shadow-[0_4px_24px_rgba(0,0,0,0.3)] hover:border-[rgba(191,0,255,0.3)] transition-all">
                     <div className="flex items-center gap-5">
-                      <span className="text-4xl bg-[var(--bg-hex)] w-16 h-16 rounded-xl flex items-center justify-center border border-[rgba(var(--fg-rgb),0.05)]">{act.image}</span>
+                      <span className="text-4xl bg-[var(--bg-hex)] w-16 h-16 rounded-xl flex items-center justify-center border border-[rgba(var(--fg-rgb),0.05)]">
+                        {typeof act.image === "string" ? act.image : (act.type === "Career Improvement" ? "🎪" : act.type === "Workshop" ? "📝" : act.type === "Training" ? "📱" : act.type === "Events" ? "🚀" : "🤝")}
+                      </span>
                       <div>
                         <p className="font-display font-bold text-lg text-[rgb(var(--fg-rgb))] tracking-wide mb-1">{act.title}</p>
                         <p className="text-[rgb(var(--muted-400-rgb))] text-sm">{act.date} <span className="opacity-50">·</span> <span style={{ color: "#00f5ff" }}>{act.type}</span></p>

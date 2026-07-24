@@ -14,6 +14,11 @@
   --font-sans: var(--font-inter), sans-serif;
 }
 
+/* Active font — swapped at runtime by FontApplier.tsx */
+:root {
+  --active-font: var(--font-inter), 'Inter', sans-serif;
+}
+
 /* ══════════════════════════════════════════════════
    THEME TOKENS
    Dark is the default (matches the original design).
@@ -58,7 +63,7 @@ html {
 
 html,
 body {
-  font-family: "Inter", sans-serif;
+  font-family: var(--active-font);
   background-color: rgb(var(--bg-rgb));
   color: rgb(var(--muted-300-rgb));
   overflow-x: hidden;

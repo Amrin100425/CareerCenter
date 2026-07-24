@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowLeft,
   Calendar,
@@ -39,21 +40,32 @@ export default function ActivityDetailPage({
             <div
               className="bg-[var(--card-hex)]/60 backdrop-blur-md rounded-2xl overflow-hidden border border-[rgba(191,0,255,0.15)] shadow-[0_0_20px_rgba(0,0,0,0.5)]"
             >
-              <div
-                className="p-8 flex items-center gap-6 border-b border-[rgba(var(--fg-rgb),0.05)] relative"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-[rgba(191,0,255,0.05)] to-transparent pointer-events-none"></div>
-                <div className="text-6xl drop-shadow-[0_0_15px_rgba(191,0,255,0.3)] relative z-10">{activity.image}</div>
-                <div className="relative z-10">
-                  <span
-                    className="text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-widest bg-[rgba(255,215,0,0.1)] text-[#ffd700] border border-[rgba(255,215,0,0.3)] shadow-[0_0_10px_rgba(255,215,0,0.2)]"
-                  >
-                    {activity.type}
-                  </span>
-                  <h1 className="font-display text-3xl font-bold text-[rgb(var(--fg-rgb))] mt-4 tracking-wide leading-tight">
-                    {activity.title}
-                  </h1>
-                </div>
+              {/* Header Image banner */}
+              <div className="relative w-full h-64 overflow-hidden border-b border-[rgba(var(--fg-rgb),0.05)]">
+                {typeof activity.image === "string" ? (
+                  <div className="w-full h-full flex items-center justify-center text-8xl bg-gradient-to-br from-[rgba(191,0,255,0.15)] to-[rgba(0,245,255,0.15)]">
+                    {activity.image}
+                  </div>
+                ) : (
+                  <Image
+                    src={activity.image}
+                    alt={activity.title}
+                    fill
+                    className="object-cover"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(var(--bg-rgb),0.9)] via-transparent to-[rgba(var(--bg-rgb),0.3)]"></div>
+              </div>
+
+              <div className="p-8 relative z-10 border-b border-[rgba(var(--fg-rgb),0.05)]">
+                <span
+                  className="text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-widest bg-[rgba(255,215,0,0.1)] text-[#ffd700] border border-[rgba(255,215,0,0.3)] shadow-[0_0_10px_rgba(255,215,0,0.2)]"
+                >
+                  {activity.type}
+                </span>
+                <h1 className="font-display text-3xl font-bold text-[rgb(var(--fg-rgb))] mt-4 tracking-wide leading-tight">
+                  {activity.title}
+                </h1>
               </div>
               <div className="p-8 grid sm:grid-cols-2 gap-4 bg-[rgba(var(--bg-rgb),0.2)]">
                 {[

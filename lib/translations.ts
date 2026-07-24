@@ -82,11 +82,11 @@ const translations = {
     spotsLeft:     { en: "spots left",          km: "កន្លែងនៅសល់" },
     registered:    { en: "registered",          km: "បានចុះឈ្មោះ" },
     activityTypes: {
-      "Career Fair": { en: "Career Fair", km: "ពិព័រណ៍អាជីព" },
-      Workshop:      { en: "Workshop",    km: "វគ្គសិក្ខាសាលា" },
-      Seminar:       { en: "Seminar",     km: "សិក្ខាសាលា" },
-      Training:      { en: "Training",    km: "ការបណ្ដុះបណ្ដាល" },
-      Networking:    { en: "Networking",  km: "បណ្ដាញទំនាក់ទំនង" },
+      "Career Improvement": { en: "Career Improvement", km: "ការកែលម្អអាជីព" },
+      Workshop:             { en: "Workshop",           km: "វគ្គសិក្ខាសាលា" },
+      Events:               { en: "Events",             km: "ព្រឹត្តិការណ៍" },
+      Training:             { en: "Training",           km: "ការបណ្ដុះបណ្ដាល" },
+      Networking:           { en: "Networking",         km: "បណ្ដាញទំនាក់ទំនង" },
     },
   },
 

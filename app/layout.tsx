@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
+import { Inter, Orbitron, Kantumruy_Pro } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/lib/language-context";
+import FontApplier from "@/components/FontApplier";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
+const kantumruy = Kantumruy_Pro({ subsets: ["khmer", "latin"], weight: ["300", "400", "500", "700"], variable: "--font-kantumruy" });
 
 export const metadata: Metadata = {
   title: "USEA Career Center – Siem Reap, Cambodia",
@@ -29,13 +31,14 @@ const noFlashScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${orbitron.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${orbitron.variable} ${kantumruy.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
       </head>
-      <body className="min-h-screen flex flex-col neon-bg font-sans" style={{ fontFamily: "var(--font-inter), sans-serif" }} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col neon-bg font-sans" style={{ fontFamily: "var(--active-font)" }} suppressHydrationWarning>
         <ThemeProvider>
           <LanguageProvider>
+            <FontApplier />
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />

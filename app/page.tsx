@@ -296,7 +296,9 @@ export default function HomePage() {
                     borderRight: "1px solid rgba(0,245,255,0.15)",
                   }}
                 >
-                  <span className="text-2xl mb-2">{act.image}</span>
+                  <span className="text-2xl mb-2">
+                    {typeof act.image === "string" ? act.image : (act.type === "Career Improvement" ? "🎪" : act.type === "Workshop" ? "📝" : act.type === "Training" ? "📱" : act.type === "Events" ? "🚀" : "🤝")}
+                  </span>
                   <p
                     className="text-xs font-bold uppercase tracking-wider"
                     style={{ color: "#00f5ff" }}
