@@ -39,10 +39,10 @@ function useScrollReveal() {
 
 // Khmer stat labels lookup
 const statLabelMap: Record<string, { en: string; km: string }> = {
-  "Jobs Posted":         tr.stats.jobsPosted,
+  "Jobs Posted": tr.stats.jobsPosted,
   "Employers Partnered": tr.stats.employersPartner,
-  "Job Seekers Placed":  tr.stats.seekersPlaced,
-  "Training Programs":   tr.stats.trainingPrograms,
+  "Job Seekers Placed": tr.stats.seekersPlaced,
+  "Training Programs": tr.stats.trainingPrograms,
 };
 
 export default function HomePage() {
